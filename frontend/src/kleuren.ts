@@ -1,0 +1,1 @@
+export const huisKleuren = ['#06336C', '#FF8500', '#2A9D8F', '#8E5BD0', '#D1495B', '#65758B']

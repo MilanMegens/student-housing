@@ -1,19 +1,7 @@
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Filler,
-  Tooltip,
-  type ScriptableContext,
-} from 'chart.js'
+import type { ScriptableContext } from 'chart.js'
 import { Line } from 'react-chartjs-2'
+import './chartSetup'
 import type { Punt, Soort } from '../types'
-
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Filler, Tooltip)
-ChartJS.defaults.font.family = 'DM Sans'
-ChartJS.defaults.color = '#65758B'
 
 function verloop(rgb: string) {
   return (ctx: ScriptableContext<'line'>) => {
@@ -64,20 +52,16 @@ export default function EnergieGrafiek({ punten, soort }: { punten: Punt[]; soor
         animation: false,
         interaction: { mode: 'index', intersect: false },
         plugins: {
-            legend: { display: false },
-            tooltip: {
-                callbacks: {
-                label: (ctx) => `${ctx.dataset.label}: ${ctx.parsed.y} ${ctx.dataset.label === 'Gas' ? 'm³' : 'kWh'}`,
-                },
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: (ctx) => `${ctx.dataset.label}: ${ctx.parsed.y} ${ctx.dataset.label === 'Gas' ? 'm³' : 'kWh'}`,
             },
-            },
-            scales: {
-            x: { grid: { display: false } },
-            y: {
-                beginAtZero: true,
-                grid: { color: '#EAF1F9' },
-                border: { display: false },
-            },
+          },
+        },
+        scales: {
+          x: { grid: { display: false } },
+          y: { beginAtZero: true, grid: { color: '#EAF1F9' }, border: { display: false } },
         },
       }}
     />
